@@ -1,0 +1,33 @@
+{
+  "name": "@teamthunderfoot/modal",
+  "version": "0.0.8",
+  "description": "Modal package",
+  "main": "",
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-thunderfoot/modal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-thunderfoot/modal/issues"
+  },
+  "homepage": "https://github.com/team-thunderfoot/modal#readme",
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "@andresclua/jsutil": "^2.0.4",
+    "@babel/core": "^7.14.3",
+    "tiny-slider": "^2.9.4"
+  },
+  "keywords": [
+    "modal"
+  ]
+}
