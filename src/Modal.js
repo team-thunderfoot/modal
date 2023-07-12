@@ -109,7 +109,6 @@ class Modal {
     }
 
     destroy() {
-        console.log("holi")
         document.querySelectorAll(`[tf-ds-modal-target='${this.modalID}']`).forEach((element) => {
             element.removeEventListener("click", (event) => this.show())
         })
