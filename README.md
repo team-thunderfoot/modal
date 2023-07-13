@@ -26,7 +26,8 @@ class Page {
     const modal = new Modal({
         backdrop: 'c--modal-backdrop-a', // class of the backdrop
         backdropActiveClass: 'c--modal-backdrop-a--is-active', // active class of the backdrop
-        modal: 'c--modal-a', // class of the modal
+        element: document.querySelector(".c--modal-a")
+        elementClass: 'c--modal-a', // class of the modal
         modalIdTarget: 'modal-1', // ID of the modal
         modalActiveClass: 'c--modal-a--is-active', // active class of the modal
         onHide: () => {
@@ -69,7 +70,8 @@ export default ({ app }, inject) => {
     inject('Modal', () => new Modal({
         backdrop: 'c--modal-backdrop-a', // class of the backdrop
         backdropActiveClass: 'c--modal-backdrop-a--is-active', // active class of the backdrop
-        modal: 'c--modal-a', // class of the modal
+        element: document.querySelector(".c--modal-a")
+        elementClass: 'c--modal-a', // class of the modal
         modalIdTarget: 'modal-1', // ID of the modal
         modalActiveClass: 'c--modal-a--is-active', // active class of the modal
         onHide: () => {
@@ -204,7 +206,9 @@ You can customize the CSS classes used by the modal package to match your projec
 
 • `backdropActiveClass:` Specifies the CSS class to indicate that the modal backdrop is active.
 
-• `modal:` Specifies the CSS class for the modal itself.
+• `element:` Specifies the element for the modal itself.
+
+• `elementClass:` Specifies the CSS class for the modal itself.
 
 • `modalIdTarget:` Specifies the ID of the modal HTML element.
 
@@ -221,4 +225,59 @@ Destroys the Modal instance by removing event listeners and resetting the state.
 ```sh
 const modal = new Modal(options);
 modal.destroy();
+```
+
+## More than one modal
+
+If you have two or more modals, you can instantiate the JS class in the following way:
+
+```sh
+import Modal from "@teamthunderfoot/modal";
+
+class Page {
+  constructor() {
+    this.modal = [];
+
+    this.init()
+  }
+
+  init() {
+
+    document.querySelectorAll(".c--modal-a").forEach((element, index) => {
+        this.modal[index] = new Modal({
+            backdrop: "c--modal-backdrop-a",
+            backdropActiveClass: "c--modal-backdrop-a--is-active",
+            element: element,
+            elementClass : "c--modal-a",
+            modalIdTarget: element.getAttribute("id"),
+            modalActiveClass: "c--modal-a--is-active",
+            onHide: () => {
+                //do something
+            },
+            onShow: () => {
+                //do something
+            },
+        })
+    });
+
+    document.querySelector(".js--destroy-modal").addEventListener("click", (e) => {
+        e.preventDefault();
+        this.destroy()
+    })
+  }
+
+  events() {
+  }
+
+  destroy(){
+        document.querySelectorAll(".c--modal-a").forEach((element, index) => {
+            this.modal[index].destroy();
+        });
+    }
+}
+
+export default Page;
+
+new Page();
+
 ```
