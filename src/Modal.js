@@ -1,11 +1,15 @@
 import JSUTIL from "@andresclua/jsutil"
 class Modal {
     constructor(payload) {
+        this.DOM = {
+            element : payload.element,
+        }
         this.backdrop = payload.backdrop
         this.backdropActiveClass = payload.backdropActiveClass
-        this.modal = payload.modal
+        this.elementClass = payload.elementClass
         this.modalActiveClass = payload.modalActiveClass
         this.modalID = payload.modalIdTarget
+
         this.timeBackDrop = 0
         this.timeModal = 0
 
@@ -55,7 +59,7 @@ class Modal {
         }
     }
 
-    async show(element) {
+    async show() {
         // Backdrop
         var backdropHTML = document.createElement("div")
         backdropHTML.className = this.backdrop
@@ -72,7 +76,7 @@ class Modal {
         this.timeBackDrop = parseFloat(this.timeBackDropSplit[0]) * 1000
 
         // get animation duration from set css in index.html for the modal
-        const styleModal = getComputedStyle(document.querySelector(`.${this.modal}`))
+        const styleModal = getComputedStyle(this.DOM.element)
         Object.keys(styleModal).forEach((key) => {
             if (key == "transitionDuration") {
                 this.timeModal = styleModal[key]
@@ -108,7 +112,7 @@ class Modal {
         })
     }
 
-    destroy() {
+    destroy(element) {
         document.querySelectorAll(`[tf-ds-modal-target='${this.modalID}']`).forEach((element) => {
             element.removeEventListener("click", (event) => this.show())
         })
@@ -116,7 +120,7 @@ class Modal {
             element.removeEventListener("click", (event) => this.hide())
         })
 
-        this.JSUTIL.removeClass(document.querySelector(`.${this.modal}`), this.modal)
+        this.JSUTIL.removeClass(this.DOM.element, this.elementClass)
 
         this.JSUTIL = null
     }

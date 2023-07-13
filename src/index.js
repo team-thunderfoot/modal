@@ -2,33 +2,43 @@ import Modal from "./Modal"
 
 class Page {
     constructor() {
+        this.modal = [];
         this.init()
     }
     init() {
-        const modal = new Modal({
-            backdrop: "c--modal-backdrop-a",
-            backdropActiveClass: "c--modal-backdrop-a--is-active",
-            modal: "c--modal-a",
-            modalIdTarget: "modal-1",
-            modalActiveClass: "c--modal-a--is-active",
-            onHide: () => {
-                //do something
-            },
-            onShow: () => {
-                //do something
-            },
-        })
+        document.querySelectorAll(".c--modal-a").forEach((element, index) => {
+            this.modal[index] = new Modal({
+                backdrop: "c--modal-backdrop-a",
+                backdropActiveClass: "c--modal-backdrop-a--is-active",
+                element: element,
+                elementClass : "c--modal-a",
+                modalIdTarget: element.getAttribute("id"),
+                modalActiveClass: "c--modal-a--is-active",
+                onHide: () => {
+                    //do something
+                },
+                onShow: () => {
+                    //do something
+                },
+            })
+        });
+        
 
         // modal.show()
 
         // setTimeout(() => {
         //     modal.hide()
         // }, 7500)
-
+        
         document.querySelector(".js--destroy-modal").addEventListener("click", (e) => {
-            e.preventDefault()
-            var destroy = modal.destroy()
+            e.preventDefault();
+            this.destroy()
         })
+    }
+    destroy(){
+        document.querySelectorAll(".c--modal-a").forEach((element, index) => {
+            this.modal[index].destroy();
+        });
     }
 }
 export default Page
