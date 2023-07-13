@@ -2,7 +2,7 @@
 
 An npm package that provides a Modal class to manage modals in your application.
 
-[Here's an example](https://team-thunderfoot.github.io/modal/dist/index.html)
+[Here's an example](https://team-thunderfoot.github.io/modal/)
 
 ## Installation
 
