@@ -22,13 +22,7 @@ class Page {
                 },
             })
         });
-        
 
-        // modal.show()
-
-        // setTimeout(() => {
-        //     modal.hide()
-        // }, 7500)
         
         document.querySelector(".js--destroy-modal").addEventListener("click", (e) => {
             e.preventDefault();
